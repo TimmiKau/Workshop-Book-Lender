@@ -42,6 +42,10 @@ public class Person {
         this.lastName = lastName;
     }
 
+    public ArrayList<Book> getBookList(){
+        return books;
+    }
+
     //Loan book
     public void loanBook(Book book) {
         books.add(book);
