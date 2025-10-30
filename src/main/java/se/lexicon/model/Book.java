@@ -1,30 +1,23 @@
 package se.lexicon.model;
 
+import java.util.UUID;
+
 public class Book {
-    private int sequencer=0;
-    private int id;
+    private String id;
     private String title;
     private String author;
     private boolean available;
     private Person person;
 
     public Book(String title, String author) {
-        this.title = title;
-        this.author = author;
+        setTitle(title);
+        setAuthor(author);
         this.available = true;
         setId();
     }
 
     //Getter and Settler
-    public int getSequencer() {
-        return sequencer;
-    }
-
-    public void setSequencer(int sequencer) {
-        this.sequencer = sequencer;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -53,7 +46,7 @@ public class Book {
     }
 
     private void setId() {
-        this.id = ++sequencer;
+        this.id = UUID.randomUUID().toString();
     }
 
     //Get book information
