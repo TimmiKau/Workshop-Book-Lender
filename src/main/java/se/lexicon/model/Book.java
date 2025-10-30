@@ -58,8 +58,9 @@ public class Book {
 
     //Get book information
     public String getInformation(){
-        return "Title: "+title+" Author: "+author+" Available: "+available;
+        return "Title: "+title+" Author: "+author+" Available: "+available + (person != null ? " Borrowed by: " + person.getFirstName() + " " +person.getLastName() : "None has borrowed this book");
     }
+
     //Get person borrowed book
     public Person getPerson() {
         return person;
