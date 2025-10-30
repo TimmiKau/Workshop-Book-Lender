@@ -1,12 +1,14 @@
 package se.lexicon.model;
 
+import java.util.ArrayList;
+
 public class Person {
 
     private int sequencer= 0;
     private int id ;
     private String firstName;
     private String lastName;
-    private Book book;
+    private ArrayList<Book> books= new ArrayList<Book>();
 
     //Constructor
     public Person(String firstName, String lastName) {
@@ -42,18 +44,36 @@ public class Person {
 
     //Loan book
     public void loanBook(Book book) {
-        this.book = book;
+        books.add(book);
         book.setPerson(this);
     }
 
     //Return book
-    public void returnBook() {
+    public void returnBook(Book book) {
         book.returnBook();
-        this.book = null;
+        String bookTitle = book.getTitle();
+
+        for (int i = 0; i < books.size(); i++) {
+            if (books.get(i).getTitle().equals(bookTitle)) {
+                books.remove(i);
+            }
+        }
      }
+
+    public String getBooks () {
+
+        String result = "\n";
+        for (Book book : books) {
+            if(book!= null){
+                result += book.getInformation() + "\n";
+            }
+        }
+
+        return result.isEmpty() ? "No books borrowed" : result;
+    }
 
     //getPersonInformation
     public String getInformation() {
-        return "id: " + id + ", firstName: " + firstName + ", lastName: " + lastName + ", book: " + (book != null? book.getInformation() : "Has no borrowed book");
+        return "Id: " + id + ", FirstName: " + firstName + ", LastName: " + lastName + ", Books: " + (books.isEmpty() ?  "Has no borrowed book" : getBooks());
     }
 }
